@@ -79,7 +79,7 @@ class ScanDelegate(DefaultDelegate):
                         msg_data_temp = (
                             '{"time":"'
                             + time
-                            + '","device_feature_external_id":'
+                            + '","device_feature_external_id":'"
                             + "mqtt:" + mac + ":temperature"
                             + '","state":'
                             + str(temperature)
@@ -89,9 +89,9 @@ class ScanDelegate(DefaultDelegate):
                         msg_data_humidity = (
                             '{"time":"'
                             + time
-                            + '","device_feature_external_id":'
-                            + "mqtt:" + mac + ":temperature"
-                            + ',"state":'
+                            + '","device_feature_external_id":'"
+                            + "mqtt:" + mac + ":humidity"
+                            + '","state":'
                             + str(humidity)
                             + '"}'
                         )
@@ -99,9 +99,9 @@ class ScanDelegate(DefaultDelegate):
                         msg_data_battery = (
                             '{"time":"'
                             + time
-                            + '","device_feature_external_id":'
-                            + "mqtt:" + mac + ":temperature"
-                            + ',"state":'
+                            + '","device_feature_external_id":'"
+                            + "mqtt:" + mac + ":battery"
+                            + '","state":'
                             + str(battery)
                             + '"}'
                         )
