@@ -75,18 +75,34 @@ class ScanDelegate(DefaultDelegate):
                         print("  Humidity: " + str(humidity) + "%")
                         print("  Battery: " + str(battery) + "%")
 
-                        # MQTT publish as JSON
-                        msg_data = (
+                        # MQTT temperature publish as JSON
+                        msg_data_temp = (
                             '{"time":"'
                             + time
-                            + '","temperature":'
+                            + '","device_feature_external_id":'
+                            + "mqtt:" + mac + ":temperature"
+                            + '","state":'
                             + str(temperature)
-                            + ',"humidity":'
+                            + '"}'
+                        )
+                        # MQTT humidity publish as JSON
+                        msg_data_humidity = (
+                            '{"time":"'
+                            + time
+                            + '","device_feature_external_id":'
+                            + "mqtt:" + mac + ":temperature"
+                            + ',"state":'
                             + str(humidity)
-                            + ',"battery":'
+                            + '"}'
+                        )
+                        # MQTT battery publish as JSON
+                        msg_data_battery = (
+                            '{"time":"'
+                            + time
+                            + '","device_feature_external_id":'
+                            + "mqtt:" + mac + ":temperature"
+                            + ',"state":'
                             + str(battery)
-                            + ',"temperature_scale":"'
-                            + temp_scale
                             + '"}'
                         )
                         print(
@@ -94,12 +110,18 @@ class ScanDelegate(DefaultDelegate):
                             + mqtt_topic
                             + mac
                             + " ...\n\n    "
-                            + msg_data
+                            + msg_data_temp
+                            + " ...\n\n    "
+                            + msg_data_humidity
+                            + " ...\n\n    "
+                            + msg_data_battery
                         )
                         mqttc = mqtt.Client(mqtt_client)
                         mqttc.username_pw_set(mqtt_user, mqtt_pass)
                         mqttc.connect(mqtt_host, mqtt_port)
-                        mqttc.publish(mqtt_topic + mac, msg_data, 1)
+                        mqttc.publish(mqtt_topic + mac, msg_data_temp, 1)
+                        mqttc.publish(mqtt_topic + mac, msg_data_humidity, 1)
+                        mqttc.publish(mqtt_topic + mac, msg_data_battery, 1)
 
 
 def main():
