@@ -22,7 +22,6 @@ from sbm2mqtt_config import (
     mqtt_client,
     mqtt_user,
     mqtt_pass,
-    mqtt_topic,
 )
 
 # SwitchBot UUID - See https://github.com/OpenWonderLabs/python-host/wiki/Meter-BLE-open-API
@@ -77,45 +76,13 @@ class ScanDelegate(DefaultDelegate):
 
                         id_mac = mac.replace(':', '')
                         # MQTT temperature publish as JSON
-                        msg_data_temp = (
-                            '{"time":"'
-                            + time
-                            + '","device_feature_external_id":"'
-                            + "mqtt:" + id_mac + ":temperature"
-                            + '","state":"'
-                            + str(temperature)
-                            + '"}'
-                        )
+                        msg_data_temp = (str(temperature))
                         # MQTT humidity publish as JSON
-                        msg_data_humidity = (
-                            '{"time":"'
-                            + time
-                            + '","device_feature_external_id":"'
-                            + "mqtt:" + id_mac + ":humidity"
-                            + '","state":"'
-                            + str(humidity)
-                            + '"}'
-                        )
+                        msg_data_humidity = (str(humidity))
                         # MQTT battery publish as JSON
-                        msg_data_battery = (
-                            '{"time":"'
-                            + time
-                            + '","device_feature_external_id":"'
-                            + "mqtt:" + id_mac + ":battery"
-                            + '","state":"'
-                            + str(battery)
-                            + '"}'
-                        )
+                        msg_data_battery = (str(battery))
                         print(
-                            "\n  Publishing MQTT payload to "
-                            + "Informations from : "
-                            + mac
-                            + " ...\n\n    "
-                            + msg_data_temp
-                            + " ...\n\n    "
-                            + msg_data_humidity
-                            + " ...\n\n    "
-                            + msg_data_battery
+                            "\n  Publishing MQTT payload to Gladys assistant"
                         )
                         mqttc = mqtt.Client(mqtt_client)
                         mqttc.username_pw_set(mqtt_user, mqtt_pass)
