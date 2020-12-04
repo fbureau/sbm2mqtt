@@ -81,7 +81,7 @@ class ScanDelegate(DefaultDelegate):
                             '{"time":"'
                             + time
                             + '","device_feature_external_id":"'
-                            + "mqtt:" + mac + ":temperature"
+                            + "mqtt:" + id_mac + ":temperature"
                             + '","state":"'
                             + str(temperature)
                             + '"}'
@@ -91,7 +91,7 @@ class ScanDelegate(DefaultDelegate):
                             '{"time":"'
                             + time
                             + '","device_feature_external_id":"'
-                            + "mqtt:" + mac + ":humidity"
+                            + "mqtt:" + id_mac + ":humidity"
                             + '","state":"'
                             + str(humidity)
                             + '"}'
@@ -101,7 +101,7 @@ class ScanDelegate(DefaultDelegate):
                             '{"time":"'
                             + time
                             + '","device_feature_external_id":"'
-                            + "mqtt:" + mac + ":battery"
+                            + "mqtt:" + id_mac + ":battery"
                             + '","state":"'
                             + str(battery)
                             + '"}'
@@ -121,8 +121,8 @@ class ScanDelegate(DefaultDelegate):
                         mqttc.username_pw_set(mqtt_user, mqtt_pass)
                         mqttc.connect(mqtt_host, mqtt_port)
                         mqttc.publish("gladys/master/device/mqtt:sbm:" + id_mac + "/feature/mqtt:" + id_mac + ":temperature/state", msg_data_temp, 1)
-                        mqttc.publish(mqtt_topic + mac, msg_data_humidity, 1)
-                        mqttc.publish(mqtt_topic + mac, msg_data_battery, 1)
+                        mqttc.publish("gladys/master/device/mqtt:sbm:" + id_mac + "/feature/mqtt:" + id_mac + ":humidity/state", msg_data_humidity, 1)
+                        mqttc.publish("gladys/master/device/mqtt:sbm:" + id_mac + "/feature/mqtt:" + id_mac + ":battery/state", msg_data_battery, 1)
 
 
 def main():
