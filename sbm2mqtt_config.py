@@ -10,4 +10,3 @@ mqtt_timeout = 30
 mqtt_client = "switchbot_meter_checker"
 mqtt_user = "xxxxxx"
 mqtt_pass = "xxxxxx"
-mqtt_topic = "switchbot_meter/"
